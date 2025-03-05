@@ -1,51 +1,104 @@
+"use client";
+import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation"; // Import useRouter
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-"use client"
-import Link from "next/link"
-import React from "react"
+export default function Login() {
+  const router = useRouter(); // Initialize the router
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
 
-export default function Login(){
-    const  [userlogin , setUserLogin ] = React.useState({
-        Email :"",
-        password :""
+  const [errors, setErrors] = useState({});
 
+  const validateForm = () => {
+    let errorMessages = {};
+    if (!user.email) errorMessages.email = "Email is required.";
+    if (!user.password) errorMessages.password = "Password is required.";
 
-    })
-    return(<>
-<div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-    <h1 className="text-2xl font-bold mb-4">Hi, Login</h1>
-    
-    <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
-        <label htmlFor="userLogin" className="block text-sm font-medium text-gray-700 mb-2">
-            User Login
-        </label>
-        <input
-            placeholder="Enter your email"
-            id="emailuser"
-            type="text"
-            value={userlogin.Email}
-            onChange={(e) => setUserLogin({ ...userlogin, Email: e.target.value })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-        />
-        
-        <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-            User Password
-        </label>
-        <input
-            placeholder="Enter your password"
-            id="password"
-            type="password"
-            value={userlogin.password}
-            onChange={(e) => setUserLogin({ ...userlogin, password: e.target.value })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-        />
-<Link href="/signup">
-        <button className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-              home
-         
-        </button></Link>
+    setErrors(errorMessages);
+    return Object.keys(errorMessages).length === 0;
+  };
+
+  const OnLogin = async () => {
+    const isValid = validateForm();
+    if (!isValid) {
+      toast.error("Form is invalid! Please correct the errors.");
+      return;
+    }
+
+    toast.success("Login successful! Redirecting to home...");
+
+    // Redirect to home after 2 seconds
+    setTimeout(() => {
+      router.push("/Home");
+    }, 2000);
+  };
+
+  return (
+    <div className="flex flex-col md:flex-row items-center justify-center bg-gray-100 min-h-screen">
+      {/* Left Side - Image */}
+      <div className="hidden md:block">
+        <img src="/login.jpg" alt="Login" className="w-full h-screen object-cover" />
+      </div>
+
+      {/* Right Side - Login Form */}
+      <div className="w-full md:w-1/2 flex items-center justify-center p-6">
+        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+          <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Login Account</h2>
+
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <input
+                id="email"
+                type="text"
+                value={user.email}
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
+                placeholder="Enter your email"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                value={user.password}
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
+                placeholder="Enter your password"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+              {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
+            </div>
+
+            <button
+              onClick={OnLogin}
+              className="w-full py-3 px-4 bg-green-900 text-white rounded-lg text-lg font-semibold hover:bg-green-800 transition duration-300"
+            >
+              Login
+            </button>
+
+            <div className="text-center">
+              <p className="text-gray-600 text-sm">
+                {/* Don't have an account?{" "} */}
+                <Link href="/signup" className="text-blue-500 hover:underline">
+                  Signup here
+                </Link>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-        </>)
+  );
 }
