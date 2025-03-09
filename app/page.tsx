@@ -24,7 +24,7 @@ const Page = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/Home"); // Use "/Home" if your folder is capitalized
+    router.push("/signup"); // Use "/Home" if your folder is capitalized
   }, [router]);
 
   return <div>Redirecting...</div>;
