@@ -70,7 +70,7 @@ const Navbar = () => {
     <nav className="bg-darkGreen border-b fixed top-0 left-0 right-0 z-50 shadow-md">
       <div className="w-3/4 mx-auto flex items-center justify-between p-4">
         {/* Logo */}
-        <Link href="/signup" onClick={() => handleLinkClick("/home")}>
+        <Link href="/Home" onClick={() => handleLinkClick("/home")}>
           <img
             src="/logo.jpg"
             alt="Prayer Tracker Logo"
@@ -99,9 +99,9 @@ const Navbar = () => {
         <div
           className={`${
             isMobileMenuOpen ? "block" : "hidden"
-          } md:flex md:items-center md:space-x-6 w-full md:w-auto absolute md:relative top-16 md:top-0 left-0 bg-darkGreen md:bg-transparent shadow-lg md:shadow-none z-50 p-4 md:p-0`}
+          } md:flex md:items-center md:space-x-6 w-full md:w-auto absolute md:relative top-16 md:top-0 left-0 bg-white md:bg-transparent shadow-lg md:shadow-none z-50 p-4 md:p-0`}
         >
-          <ul className="flex flex-col md:flex-row md:space-x-8 border md:border-0 rounded-lg bg-darkGreen md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+          <ul className="flex flex-col md:flex-row md:space-x-8 border md:border-0 rounded-lg bg-gray-50 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
             <li>
               <Link href="/Home" onClick={() => handleLinkClick("/home")} className={linkClass("/home")}>
                 Home
@@ -122,29 +122,28 @@ const Navbar = () => {
                 Pray Tracker
               </Link>
             </li>
-            <div className="mt-4 md:mt-0 flex items-center space-x-3">
+          </ul>
+
+          {/* Authentication Buttons */}
+          <div className="mt-4 md:mt-0 flex items-center space-x-3">
             {isAuthenticated ? (
-           <>
-           <Link href="/login">
-             <Button text="Login" variant="primary" className="shadow-lg" />
-           </Link>
-           <Link href="/signup">
-             <Button text="Signup" variant="primary" className="shadow-lg" />
-           </Link>
-         </>   
-            ) : (
               <Button
                 text="Logout"
                 variant="primary"
                 className="shadow-lg"
                 onClick={handleLogout}
               />
-              
+            ) : (
+              <>
+                <Link href="/login">
+                  <Button text="Login" variant="primary" className="shadow-lg" />
+                </Link>
+                <Link href="/signup">
+                  <Button text="Signup" variant="primary" className="shadow-lg" />
+                </Link>
+              </>
             )}
-          </div> </ul>
-
-          {/* Authentication Buttons */}
-         
+          </div>
         </div>
       </div>
     </nav>

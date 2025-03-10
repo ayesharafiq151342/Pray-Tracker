@@ -1,10 +1,10 @@
 "use client";
 import React from 'react';
-import { Mail, Phone, MapPin, Facebook, Twitter, Youtube, Linkedin } from 'lucide-react';
+import {  Facebook, Twitter, Youtube, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-HoverGreen mt-20 text-white py-10 px-5">
+    <footer className="bg-gradient-to-r from-darkGreen to-HoverGreen  mt-20 text-white py-10 px-5">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         
         {/* About Us */}
@@ -31,17 +31,9 @@ const Footer = () => {
         <div>
           <h3 className="text-xl font-bold border-l-4 border-lightGreen pl-2 mb-4">Contact Us</h3>
           <ul className="space-y-3 text-sm">
-            <li className="flex items-center">
-              <Mail className="mr-2 w-5 h-5" /> Ayesharafiq151342@gmail.com
-            </li>
-            <li className="flex items-center">
-              <Phone className="mr-2 w-5 h-5" /> +0323751475
-            </li>
-          
-            <li className="flex items-start">
-              <MapPin className="mr-2 w-5 h-5 mt-1" />
-              6th floor Legacy tower city  Faisalabad, Pakistan
-            </li>
+          <li>📍 <strong>Address:</strong>              6th floor Legacy tower city  Faisalabad, Pakistan</li>
+              <li>📞 <strong>Phone:</strong> 03299751475</li>
+              <li>📧 <strong>Email:</strong> bc210416395aye@vu.edu.pk</li>
           </ul>
 
           {/* Social Icons */}

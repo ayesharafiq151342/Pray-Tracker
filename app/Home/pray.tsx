@@ -24,6 +24,7 @@ const PrayerTracker = () => {
 
 
     </section>
+    
     {/* Info Section */}
     <section className="text-center lg:h-96 bg-darkGreen py-8 px-4">
       <p className="text-lg lg:mt-12 lg:text-4xl md:text-2xl max-w-2xl mx-auto">
