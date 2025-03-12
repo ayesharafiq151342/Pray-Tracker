@@ -1,128 +1,142 @@
 "use client";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import Navbar from "../components/navbar";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+import { useState } from "react";
+import Sidebar from "@/app/components/sidebar";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  AreaChart,
+  Area,
+} from "recharts";
 
-interface User {
-  _id: string;
-  name: string;
-  email: string;
-  status: boolean;
-}
+const AdminDashboard = () => {
+  const [activeTab, setActiveTab] = useState("users");
 
-const AdminUserManagement = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
+  const data = [
+    { month: "Jan", revenue: 5000 },
+    { month: "Feb", revenue: 7000 },
+    { month: "Mar", revenue: 9000 },
+    { month: "Apr", revenue: 8500 },
+    { month: "May", revenue: 9200 },
+  ];
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  const data2 = [
+    { name: "Apple", value: 400 },
+    { name: "Samsung", value: 300 },
+    { name: "Xiaomi", value: 300 },
+    { name: "OnePlus", value: 200 },
+  ];
 
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/api/users/data", {
-        withCredentials: true,
-      });
-      console.log("API Response:", response.data);
-      if (response.data.success) {
-        if (Array.isArray(response.data.users)) {
-          setUsers(response.data.users);
-        } else {
-          console.error("Error: users is not an array", response.data.users);
-          setUsers([]);
-        }
-      }
-    } catch (error) {
-      console.error("Error fetching users", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
-  const toggleStatus = async (userId: string, currentStatus: boolean) => {
-    try {
-      const response = await axios.put(
-        "http://localhost:4000/api/users/update-status",
-        { userId, status: !currentStatus },
-        { withCredentials: true }
-      );
-      if (response.data.success) {
-        setUsers((prevUsers) =>
-          prevUsers.map((user) =>
-            user._id === userId ? { ...user, status: !currentStatus } : user
-          )
-        );
-        // Check if the toggled user is the currently logged in user
-        const currentUserId = localStorage.getItem("userId");
-        if (userId === currentUserId && !currentStatus) {
-          // If current user's account is deactivated, log them out and redirect
-          localStorage.removeItem("token");
-          localStorage.removeItem("userId");
-          toast.info("Your account has been deactivated by the admin. Please sign up to continue.");
-          router.push("/signup");
-        }
-      }
-    } catch (error) {
-      console.error("Error updating status", error);
-    }
-  };
-
-  if (loading) return <p className="text-center text-lg">Loading users...</p>;
+  const data3 = [
+    { name: "Jan", sales: 400 },
+    { name: "Feb", sales: 600 },
+    { name: "Mar", sales: 800 },
+    { name: "Apr", sales: 500 },
+    { name: "May", sales: 700 },
+  ];
 
   return (
-    <>
-      <Navbar />
-      <div className="p-6 bg-gray-50 min-h-screen">
-        <h1 className="text-3xl font-bold text-center mb-8">User Management</h1>
-        <div className="bg-white shadow-md rounded-lg p-4">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="border-b">
-                <th className="p-3">User</th>
-                <th className="p-3">Email</th>
-                <th className="p-3">Status</th>
-                <th className="p-3">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user) => (
-                <tr key={user._id} className="border-b hover:bg-gray-100">
-                  <td className="p-3">{user.name}</td>
-                  <td className="p-3">{user.email}</td>
-                  <td className="p-3">
-                    <span
-                      className={`px-2 py-1 rounded-full text-xs ${
-                        user.status
-                          ? "bg-green-200 text-green-800"
-                          : "bg-red-200 text-red-800"
-                      }`}
-                    >
-                      {user.status ? "Active" : "Deactivated by Admin"}
-                    </span>
-                  </td>
-                  <td className="p-3">
-                    <button
-                      className={`px-3 py-1 text-white rounded ${
-                        user.status
-                          ? "bg-red-500 hover:bg-red-700"
-                          : "bg-green-500 hover:bg-green-700"
-                      }`}
-                      onClick={() => toggleStatus(user._id, user.status)}
-                    >
-                      {user.status ? "Deactivate" : "Activate"}
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    <div className="flex flex-col md:flex-row min-h-screen bg-darkGreen">
+     <Sidebar setActiveTab={setActiveTab} />
+
+      <div className="flex-1 p-6 overflow-y-auto">
+        <h1 className="text-3xl font-bold text-white mb-6 text-center">
+          Admin Dashboard Overview
+        </h1>
+        <div className="bg-white p-6 mt-6 rounded-lg shadow">
+  <h2 className="text-lg font-semibold mb-2">Current Tab: {activeTab}</h2>
+  {activeTab === "users" && <p>Showing Users Section...</p>}
+  {activeTab === "prayer_guidance" && <p>Showing Prayer Guidance Section...</p>}
+</div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="bg-white p-6 rounded-lg shadow">
+            <h2 className="text-lg font-semibold mb-2">Prayer Goals</h2>
+            <div className="w-full h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={data}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Area type="monotone" dataKey="revenue" stroke="#8884d8" fill="#8884d8" />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+          
+          <div className="bg-white p-6 rounded-lg shadow">
+            <h2 className="text-lg font-semibold mb-2">Completion Ratio</h2>
+            <div className="w-full h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={data2}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={100}
+                    fill="#8884d8"
+                    dataKey="value"
+                    label
+                  >
+                    {data2.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+          
+          <div className="bg-white p-6 rounded-lg shadow">
+            <h2 className="text-lg font-semibold mb-2">Total Prayers Tracked</h2>
+            <div className="w-full h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={data3}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="sales" stroke="#8884d8" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </div>
+        
+        <div className="bg-white p-6 mt-6 rounded-lg shadow">
+          <h2 className="text-lg font-semibold mb-2">User Engagement Bar Chart</h2>
+          <div className="w-full h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={data3}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="sales" fill="#82ca9d" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default AdminUserManagement;
+export default AdminDashboard;

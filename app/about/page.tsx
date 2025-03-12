@@ -1,153 +1,74 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import Button from "../ui/butons"; // Adjust the import path as needed
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { FaCheckCircle } from "react-icons/fa";
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 
-const Navbar = () => {
-  const router = useRouter();
-
-  // Mobile menu state
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // Active link for styling
-  const [activeLink, setActiveLink] = useState("");
-  // Authentication state
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // On component mount, check if a token exists in localStorage
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuthenticated(true);
-    }
-    setActiveLink(window.location.pathname.toLowerCase());
-  }, []);
-
-  // Toggle mobile menu
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  // Set active link and close mobile menu
-  const handleLinkClick = (link) => {
-    setActiveLink(link.toLowerCase());
-    setIsMobileMenuOpen(false);
-  };
-
-  // Handle logout: no event parameter needed
-  const handleLogout = async () => {
-    try {
-      const response = await fetch("http://localhost:4000/api/auth/logout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-      const data = await response.json();
-      console.log("Logout Response:", data);
-      if (data.success) {
-        localStorage.removeItem("token");
-        setIsAuthenticated(false);
-        toast.success("Logged Out");
-        router.push("/signup");
-      } else {
-        toast.error(data.message || "Logout failed");
-      }
-    } catch (error) {
-      console.error("Error logging out:", error);
-      toast.error("Error logging out");
-    }
-  };
-
-  // Helper function for link styling
-  const linkClass = (link) =>
-    `block px-3 py-2 text-white dark:text-white hover:bg-lightGreen rounded-lg ${
-      activeLink === link.toLowerCase() ? "bg-lightGreen" : ""
-    }`;
-
+const Page = () => {
   return (
-    <nav className="bg-darkGreen border-b fixed top-0 left-0 right-0 z-50 shadow-md">
-      <div className="w-3/4 mx-auto flex items-center justify-between p-4">
-        {/* Logo */}
-        <Link href="/Home" onClick={() => handleLinkClick("/home")}>
-          <img
-            src="/logo.jpg"
-            alt="Prayer Tracker Logo"
-            className="h-12 w-auto rounded-lg transition-all duration-300 hover:scale-105"
-          />
-        </Link>
+    <div className="bg-darkGreen">
+      <Navbar />
+      <div className="w-full lg:h-screen h-f\ flex items-center justify-center mb-8">
+  <video
+    src="/video2.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="w-full lg:h-full object-cover rounded-lg shadow-lg"
+  />
+</div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={toggleMobileMenu}
-          className="md:hidden text-lightGreen dark:text-lightGreen p-2 rounded-lg focus:ring-2"
-          aria-label="Toggle Menu"
-        >
-          {isMobileMenuOpen ? (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-          )}
-        </button>
+      <div className="min-h-screen bg-darkGreen flex flex-col items-center justify-center p-6">
+     
 
-        {/* Navbar Links */}
-        <div
-          className={`${
-            isMobileMenuOpen ? "block" : "hidden"
-          } md:flex md:items-center md:space-x-6 w-full md:w-auto absolute md:relative top-16 md:top-0 left-0 bg-white md:bg-transparent shadow-lg md:shadow-none z-50 p-4 md:p-0`}
-        >
-          <ul className="flex flex-col md:flex-row md:space-x-8 border md:border-0 rounded-lg bg-gray-50 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
-            <li>
-              <Link href="/Home" onClick={() => handleLinkClick("/home")} className={linkClass("/home")}>
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/about" onClick={() => handleLinkClick("/about")} className={linkClass("/about")}>
-                About
-              </Link>
-            </li>
-            <li>
-              <Link href="/contactus" onClick={() => handleLinkClick("/contactus")} className={linkClass("/contactus")}>
-                Contact
-              </Link>
-            </li>
-            <li>
-              <Link href="/Praytracker" onClick={() => handleLinkClick("/praytracker")} className={linkClass("/praytracker")}>
-                Pray Tracker
-              </Link>
-            </li>
-          </ul>
+        <div className="max-w-4xl bg-white/80 backdrop-blur-md shadow-xl rounded-2xl p-10 text-center border border-gray-200">
+          {/* Title */}
+          <h1 className="text-4xl font-extrabold text-darkGreen mb-6 drop-shadow-md">
+            About <span className="text-lightGreen">Prayer Tracker</span>
+          </h1>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            <strong>Prayer Tracker</strong> is a beautifully crafted platform designed to help you stay consistent with your daily prayers. 
+            Easily track your prayers, monitor missed (Qaza) prayers, and stay spiritually aligned.
+          </p>
 
-          {/* Authentication Buttons */}
-          <div className="mt-4 md:mt-0 flex items-center space-x-3">
-            {isAuthenticated ? (
-              <Button
-                text="Logout"
-                variant="primary"
-                className="shadow-lg"
-                onClick={handleLogout}
-              />
-            ) : (
-              <>
-                <Link href="/login">
-                  <Button text="Login" variant="primary" className="shadow-lg" />
-                </Link>
-                <Link href="/signup">
-                  <Button text="Signup" variant="primary" className="shadow-lg" />
-                </Link>
-              </>
-            )}
+          {/* Features Section */}
+          <div className="mt-8 text-left space-y-4">
+            <h2 className="text-2xl font-semibold text-darkGreen">✨ Key Features</h2>
+            <div className="grid md:grid-cols-2 gap-6 mt-4">
+              <FeatureItem text="Track daily and missed (Qaza) prayers" />
+              <FeatureItem text="Set goals & reminders for consistency" />
+              <FeatureItem text="Detailed insights on prayer habits" />
+              <FeatureItem text="Minimalist and easy-to-use interface" />
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="mt-10">
+            <a
+              href="/Praytracker"
+              className="bg-darkGreen text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-lightGreen transition-all duration-300"
+            >
+              Start Tracking Now 🚀
+            </a>
           </div>
         </div>
       </div>
-    </nav>
+      <Footer />
+    </div>
   );
 };
 
-export default Navbar;
+// Define props type
+interface FeatureItemProps {
+  text: string;
+}
+
+// Feature Item Component
+const FeatureItem: React.FC<FeatureItemProps> = ({ text }) => (
+  <div className="flex items-center space-x-3 bg-white/60 backdrop-blur-md p-3 rounded-lg shadow-sm">
+    <FaCheckCircle className="text-lightGreen text-xl" />
+    <span className="text-gray-800 font-medium">{text}</span>
+  </div>
+);
+
+export default Page;
