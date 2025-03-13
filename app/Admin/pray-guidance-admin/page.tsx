@@ -105,34 +105,95 @@ const PrayerGuidance = () => {
   return (
     <div className='flex flex-col md:flex-row min-h-screen bg-darkGreen'>
       <Sidebar setActiveTab={setActiveTab}/>
-      <div className="bg-darkGreen w-6 h-9 p-6 mt-6 rounded-lg shadow">
-  <h2 className="text-darkGreen font-semibold mb-2">Current Tab: {activeTab}</h2>
-  {activeTab === "users" && <p className="text-darkGreen ">Showing Users Section...</p>}
-  {activeTab === "prayer_guidance" && <p className="text-darkGreen ">Showing Prayer Guidance Section...</p>}
+      <div className="flex-1 p-6 overflow-y-auto w-96">
+        <h1 className="text-3xl font-bold text-white mb-6 text-center">
+          Admin Dashboard Overview
+        </h1>
+        <div className="bg-white w-7/12 m-auto  p-6 mt-6 rounded-lg shadow">
+  <h2 className="text-lg font-semibold mb-2">Current Tab: {activeTab}</h2>
+  {activeTab === "users" && <p>Showing Users Section...</p>}
+  {activeTab === "prayer_guidance" && <p>Showing Prayer Guidance Section...</p>}
 </div>
       <div className='flex-1 p-6 overflow-y-auto'>
         <h1 className='text-3xl font-bold mb-6 text-center text-white'>Prayer Guidance Management</h1>
+        <form 
+  onSubmit={handleSubmit} 
+  className="space-y-6 bg-white p-6 rounded-lg shadow-lg lg:w-[900px] w-full mx-auto border border-gray-200"
+  encType="multipart/form-data"
+>
+  {/* Prayer Selection */}
+  <div className="relative">
+    <label htmlFor="prayer" className="block text-lg font-semibold text-gray-700 mb-2">
+      Select a Prayer
+    </label>
+    <select 
+      id="prayer"
+      value={category} 
+      onChange={(e) => setCategory(e.target.value)} 
+      className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none bg-white text-gray-800 transition duration-300"
+      required
+    >
+      <option value="" className="text-gray-500">-- Choose a Prayer --</option>
+      <optgroup label="Farz Prayers" className="text-black font-semibold">
+        <option value="Fajr">Fajr</option>
+        <option value="Zohr">Dhuhr</option>
+        <option value="Asr">Asr</option>
+        <option value="Maghrib">Maghrib</option>
+        <option value="Isha">Isha</option>
+      </optgroup>
+      <optgroup label="Sunnah & Nafl Prayers" className="text-black font-semibold">
+        <option value="Tahajjud">Tahajjud</option>
+        <option value="Ishraq">Ishraq</option>
+        <option value="Chasht">Chasht (Duha)</option>
+        <option value="Awwabin">Awwabin</option>
+        <option value="Istikhara">Istasqa </option>
+        <option value="Tarawih">Tarawih</option>
+        <option value="Tahiyyat-ul-Masjid">Tahiyyat-ul-Masjid</option>
+      </optgroup>
+      <optgroup label="Special Prayers" className="text-black font-semibold">
+        <option value="Janazah">Janazah (Funeral Prayer)</option>
+      </optgroup>
+    </select>
+  </div>
 
-        <form onSubmit={handleSubmit} className='space-y-4 bg-white p-4 rounded shadow lg:w-[900px] lg:m-auto' encType='multipart/form-data'>
-          <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full p-2 border rounded" required>
-            <option value="">Select a Prayer</option>
-            <option value="Fajr">FAJAR</option>
-            <option value="Zohr">DHUHR</option>
-            <option value="Asr">ASR</option>
-            <option value="Maghrib">MAGHRIB</option>
-            <option value="Isha">Isha</option>
-           
+  {/* Description Field */}
+  <div>
+    <label htmlFor="description" className="block text-lg font-semibold text-gray-700 mb-2">
+      Prayer Description
+    </label>
+    <textarea 
+      id="description"
+      value={description} 
+      onChange={(e) => setDescription(e.target.value)} 
+      className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none bg-white text-gray-800 transition duration-300"
+     
+      required
+    />
+  </div>
 
-          </select>
+  {/* Image Upload */}
+  <div>
+    <label htmlFor="image" className="block text-lg font-semibold text-gray-700 mb-2">
+      Upload Image
+    </label>
+    <input 
+      type="file" 
+      id="image"
+      accept="image/*" 
+      onChange={handleImageChange} 
+      className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none bg-white text-gray-800 transition duration-300 cursor-pointer"
+    />
+  </div>
 
-          <textarea value={description} onChange={(e) => setDescription(e.target.value)} className='w-full p-2 border rounded' required />
-
-          <input type='file' accept='image/*' onChange={handleImageChange} className='w-full p-2 border rounded' />
-
-          <button type='submit' className='bg-darkGreen hover:bg-HoverGreen text-white px-4 py-2 rounded w-full' disabled={loading}>
-            {loading ? 'Saving...' : editId ? 'Update' : 'Save'}
-          </button>
-        </form>
+  {/* Submit Button */}
+  <button 
+    type="submit" 
+    className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg w-full shadow-md transition duration-300"
+    disabled={loading}
+  >
+    {loading ? 'Saving...' : editId ? 'Update' : 'Save'}
+  </button>
+</form>
 
         <div className="grid grid-cols-1 lg:w-[900px] sm:grid-cols-2 md:grid-cols-3 gap-4 mt-20 lg:m-auto">
           {posts.map((post, index) => (
@@ -154,7 +215,8 @@ const PrayerGuidance = () => {
           ))}
         </div>
       </div>
-    </div>
+
+      </div>    </div>
   );
 };
 

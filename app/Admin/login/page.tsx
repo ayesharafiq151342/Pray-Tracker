@@ -106,7 +106,7 @@ export default function Login() {
       if (result.success) {
         toast.success(result.message);
         setTimeout(() => {
-          router.push("/Home");
+          router.push("/Admin");
         }, 1500);
       } else {
         toast.error(result.message);

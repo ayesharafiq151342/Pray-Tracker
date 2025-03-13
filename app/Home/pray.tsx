@@ -136,7 +136,7 @@ Keep track of your missed (Qaza) prayers and stay motivated to complete them wit
 
   {/* Newsletter Subscription */}
   <div className="bg-transparent border border-white-5 p-6 rounded-lg mt-12 max-w-lg mx-auto shadow-lg">
-    <h3 className="text-lg font-semibold mb-4 text-center">
+    <h3 className="text-lg font-semibold mb-4 text-center text-white">
       Subscribe to Our Newsletter!
     </h3>
     <p className="text-gray-200 text-sm text-center mb-4">
@@ -149,7 +149,7 @@ Keep track of your missed (Qaza) prayers and stay motivated to complete them wit
         <label className="text-sm block text-gray-300">First Name: *</label>
         <input
           type="text"
-          className="w-full p-2 border border-white rounded-lg bg-white text-black"
+          className="w-full p-2 border mt-4 border-white rounded-lg bg-white text-black"
           placeholder="Enter your name"
         />
       </div>
@@ -157,7 +157,7 @@ Keep track of your missed (Qaza) prayers and stay motivated to complete them wit
         <label className="text-sm block text-gray-300">Email Address: *</label>
         <input
           type="email"
-          className="w-full p-2 border white rounded-lg bg-white text-black"
+          className="w-full p-2 border mt-4  white rounded-lg bg-white text-black"
           placeholder="Enter your email"
         />
       </div>
@@ -165,7 +165,7 @@ Keep track of your missed (Qaza) prayers and stay motivated to complete them wit
         <label className="text-sm block text-gray-300">Country: *</label>
         <input
           type="text"
-          className="w-full p-2 border white rounded-lg bg-white text-black"
+          className="w-full p-2 border white mt-4 rounded-lg bg-white text-black"
           placeholder="Enter your country"
         />
       </div>

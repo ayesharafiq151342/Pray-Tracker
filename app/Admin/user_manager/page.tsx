@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "@/app/components/sidebar"
@@ -62,7 +62,7 @@ const UserManagement = () => {
     <div className="flex min-h-screen bg-darkGreen">
       <div className="w-64 fixed h-full p-4">
       <Sidebar setActiveTab={setActiveTab} />
-      <div className="bg-darkGreen p-6 mt-6 rounded-lg shadow">
+      <div className="bg-white w-7/12 m-auto  p-6 mt-6 rounded-lg shadow">
   <h2 className="text-lg font-semibold mb-2">Current Tab: {activeTab}</h2>
   {activeTab === "users" && <p>Showing Users Section...</p>}
   {activeTab === "prayer_guidance" && <p>Showing Prayer Guidance Section...</p>}
@@ -82,36 +82,45 @@ const UserManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user._id} className="border-b hover:bg-gray-100">
-                <td className="p-3">{user.name}</td>
-                <td className="p-3">{user.email}</td>
-                <td className="p-3">
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs ${
-                      user.status
-                        ? "bg-green-200 text-green-800"
-                        : "bg-red-200 text-red-800"
-                    }`}
-                  >
-                    {user.status ? "Active" : "Deactivated"}
-                  </span>
-                </td>
-                <td className="p-3">
-                  <button
-                    className={`px-3 py-1 text-white rounded ${
-                      user.status
-                        ? "bg-red-500 hover:bg-red-700"
-                        : "bg-green-500 hover:bg-green-700"
-                    }`}
-                    onClick={() => toggleStatus(user._id, user.status)}
-                  >
-                    {user.status ? "Deactivate" : "Activate"}
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+  {users.length > 0 ? (
+    users.map((user) => (
+      <tr key={user._id} className="border-b hover:bg-gray-100">
+        <td className="p-3">{user.name}</td>
+        <td className="p-3">{user.email}</td>
+        <td className="p-3">
+          <span
+            className={`px-2 py-1 rounded-full text-xs ${
+              user.status
+                ? "bg-green-200 text-green-800"
+                : "bg-red-200 text-red-800"
+            }`}
+          >
+            {user.status ? "Active" : "Deactivated"}
+          </span>
+        </td>
+        <td className="p-3">
+          <button
+            className={`px-3 py-1 text-white rounded ${
+              user.status
+                ? "bg-red-500 hover:bg-red-700"
+                : "bg-green-500 hover:bg-green-700"
+            }`}
+            onClick={() => toggleStatus(user._id, user.status)}
+          >
+            {user.status ? "Deactivate" : "Activate"}
+          </button>
+        </td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan={4} className="p-3 text-center text-gray-500">
+        No users available
+      </td>
+    </tr>
+  )}
+</tbody>
+
         </table>
       </div>
     </div>

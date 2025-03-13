@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

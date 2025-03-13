@@ -31,9 +31,9 @@ const Footer = () => {
         <div>
           <h3 className="text-xl font-bold border-l-4 border-lightGreen pl-2 mb-4">Contact Us</h3>
           <ul className="space-y-3 text-sm">
-          <li>📍 <strong>Address:</strong>              6th floor Legacy tower city  Faisalabad, Pakistan</li>
-              <li>📞 <strong>Phone:</strong> 03299751475</li>
-              <li>📧 <strong>Email:</strong> bc210416395aye@vu.edu.pk</li>
+          <li> <strong>Address:</strong>              6th floor Legacy tower city  Faisalabad, Pakistan</li>
+              <li> <strong>Phone:</strong> 03299751475</li>
+              <li> <strong>Email:</strong> bc210416395aye@vu.edu.pk</li>
           </ul>
 
           {/* Social Icons */}

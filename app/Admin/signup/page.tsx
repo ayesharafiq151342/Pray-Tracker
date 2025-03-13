@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -64,7 +64,7 @@ export default function Signup() {
       if (response.ok && data.success) {
         toast.success("Signup successful! Redirecting to login...");
         setTimeout(() => {
-          router.push("/login");
+          router.push("/Admin/login");
         }, 2000);
       } else {
         toast.error(data.message || "Signup failed!");
@@ -93,7 +93,7 @@ export default function Signup() {
       {/* Right Side - Signup Form */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-6">
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-          <h2 className="text-3xl font-bold mb-6 text-center">Create Account</h2>
+          <h2 className="text-3xl font-bold mb-6 text-center">Create Admin Account</h2>
           <form onSubmit={handleSignup}>
             <div className="mb-4">
               <label className="block text-gray-700 mb-2">Name</label>

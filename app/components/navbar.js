@@ -113,15 +113,26 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
+              <Link href="/praytracker" onClick={() => handleLinkClick("/praytracker")} className={linkClass("/praytracker")}>
+                Pray Tracker
+              </Link>
+            </li>
+            <li>
+              <Link href="/pray_guidance" onClick={() => handleLinkClick("/pray_guidance")} className={linkClass("/pray_guidance")}>
+              Pray guidance
+              </Link>
+            </li>
+            
+            <li>
               <Link href="/contactus" onClick={() => handleLinkClick("/contactus")} className={linkClass("/contactus")}>
                 Contact
               </Link>
             </li>
-            <li>
-              <Link href="/Praytracker" onClick={() => handleLinkClick("/praytracker")} className={linkClass("/praytracker")}>
-                Pray Tracker
-              </Link>
-            </li>
+    <li><img
+                    src="/iamgedp.webp"
+                    alt="Default Avatar"
+                    className="h-10  w-10 lg:ml:0 ml-3 rounded-full border border-gray-300"
+                  /></li>
             <div className="mt-4 md:mt-0 flex items-center space-x-3">
             {isAuthenticated ? (
            <>
@@ -141,9 +152,12 @@ const Navbar = () => {
               />
               
             )}
-          </div> </ul>
+          </div> 
+        
+                  </ul>
 
-          {/* Authentication Buttons */}
+      
+                       {/* Authentication Buttons */}
          
         </div>
       </div>

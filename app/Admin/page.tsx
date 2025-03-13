@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import { useState } from "react";
 import Sidebar from "@/app/components/sidebar";
 import {
@@ -31,13 +31,18 @@ const AdminDashboard = () => {
   ];
 
   const data2 = [
-    { name: "Apple", value: 400 },
-    { name: "Samsung", value: 300 },
-    { name: "Xiaomi", value: 300 },
-    { name: "OnePlus", value: 200 },
+    { name: "Fajar", value: 400 },
+    { name: "dhuhr", value: 200 },
+    { name: "Asr", value: 300 },
+    { name: "Magrib", value: 100 ,
+
+    },
+    { name: "Esha", value: 200 ,
+      
+    },
   ];
 
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042" ,"#ec4899"];
 
   const data3 = [
     { name: "Jan", sales: 400 },
@@ -48,20 +53,23 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-darkGreen">
-     <Sidebar setActiveTab={setActiveTab} />
-
+   <>
+    <div className='flex flex-col md:flex-row min-h-screen bg-darkGreen'>
+      <Sidebar setActiveTab={setActiveTab}/>
       <div className="flex-1 p-6 overflow-y-auto">
         <h1 className="text-3xl font-bold text-white mb-6 text-center">
           Admin Dashboard Overview
         </h1>
         <div className="bg-white p-6 mt-6 rounded-lg shadow">
-  <h2 className="text-lg font-semibold mb-2">Current Tab: {activeTab}</h2>
+  <h2 className="text-lg font-semibold mb-2">Current Tab: Admin</h2>
+  {activeTab === "Admin" && <p>Showing Users Section...</p>}
   {activeTab === "users" && <p>Showing Users Section...</p>}
+ 
+
   {activeTab === "prayer_guidance" && <p>Showing Prayer Guidance Section...</p>}
 </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 mt-10 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-lg shadow">
             <h2 className="text-lg font-semibold mb-2">Prayer Goals</h2>
             <div className="w-full h-64">
@@ -135,7 +143,7 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div></>
   );
 };
 

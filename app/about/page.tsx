@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { FaCheckCircle } from "react-icons/fa";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
@@ -45,7 +45,7 @@ const Page = () => {
           {/* Call to Action */}
           <div className="mt-10">
             <a
-              href="/Praytracker"
+              href="/praytracker"
               className="bg-darkGreen text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-lightGreen transition-all duration-300"
             >
               Start Tracking Now 🚀
