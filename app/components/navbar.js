@@ -122,7 +122,9 @@ const Navbar = () => {
               Pray guidance
               </Link>
             </li>
-            
+            <li>
+             
+            </li>
             <li>
               <Link href="/contactus" onClick={() => handleLinkClick("/contactus")} className={linkClass("/contactus")}>
                 Contact

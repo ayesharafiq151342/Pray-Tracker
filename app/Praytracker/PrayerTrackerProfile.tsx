@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import PrayerTimings from "../timing/page";
+
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -188,7 +190,9 @@ function PrayerTrackerProfile() {
             alt="Namaz"
             className="w-full h-64 md:h-96 object-cover rounded-lg"
           />
+          
         </div>
+       
         <div className="w-full lg:w-full">
           <p className="text-sm md:text-base text-justify text-white leading-relaxed">
           Prayer is the soul of religion. It is the breath of faith, the essence of devotion, and the gateway to divine wisdom. It is through prayer that the restless heart finds peace, the weary soul gains strength, and the lost find their way back to the light. Where there is no prayer, there can be no purification of the heart, no awakening of the conscience, and no true connection with the Divine.
@@ -202,7 +206,14 @@ In prayer, the burdens of the world become lighter, and the heart finds solace i
 Prayer is not only an act of worship   </p>
         </div>
       </div>
+      <div className="bg-darkGreen border border-white rounded-lg p-4 md:p-6 w-full lg:w-9/12 flex flex-col lg:flex-row gap-6  shadow-xl">
 
+      <PrayerTimings/>
+
+ 
+        
+      </div>
+  
       {/* Daily Tracker */}
       <div className="p-4 md:p-6 mt-6 bg-darkGreen border border-white rounded-lg w-full lg:w-9/12 flex flex-col gap-6">
         <h3 className="text-lg md:text-xl font-semibold text-white">
@@ -212,6 +223,7 @@ Prayer is not only an act of worship   </p>
         {/* Calendar & Prayer List */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="flex justify-center">
+          
             <Calendar
               onChange={(value) => setDate(value as Date)}
               value={date}

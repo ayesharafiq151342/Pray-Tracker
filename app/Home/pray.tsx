@@ -2,8 +2,10 @@
 import React from "react";
 import Button from "../ui/butons";
 import Link from "next/link";
-
+import PrayerTimings from "../timing/page";
+import { useRouter } from "next/navigation";
 const PrayerTracker = () => {
+  const router = useRouter();
   return (
     <><div className=" text-white">
     {/* Hero Section */}
@@ -115,35 +117,48 @@ Keep track of your missed (Qaza) prayers and stay motivated to complete them wit
   </div>
 
   {/* Features Section */}
-  <div className="grid grid-cols-2 w-9/12 m-auto text-white  lg:h-[400] items-center  md:grid-cols-4 gap-6 text-center">
-    <div>
-      <img src="/image 3.png" alt="Daily Duas" className="mx-auto w-54" />
-      <p className="mt-7">Daily Duas</p>
+  <div className="grid grid-cols-2 w-9/12 m-auto text-white lg:h-[400px] items-center md:grid-cols-4 gap-6 text-center">
+      <div
+        className="cursor-pointer transition transform hover:scale-105"
+        onClick={() => router.push("/daily-duas")}
+      >
+        <img src="/image 3.png" alt="Daily Duas" className="mx-auto w-54" />
+        <p className="mt-7">Daily Duas</p>
+      </div>
+
+      <div
+        className="cursor-pointer transition transform hover:scale-105"
+        onClick={() => router.push("/Quran_Recitation")}
+      >
+        <img
+          src="/QuranPak.jpg"
+          alt="Quran Recitation"
+          className="mx-auto w-44 rounded-full"
+        />
+        <p className="mt-7">Quran Recitation</p>
+      </div>
+
+      <div
+        className="cursor-pointer transition transform hover:scale-105"
+        onClick={() => router.push("/prayer-requests")}
+      >
+        <img src="/image 5.png" alt="Prayer Requests" className="mx-auto w-54" />
+        <p className="mt-7">Prayer Requests</p>
+      </div>
+
+      <div
+        className="cursor-pointer transition transform hover:scale-105"
+        onClick={() => router.push("/hijri-calendar")}
+      >
+        <img src="/image.png" alt="Hijri Calendar" className="mx-auto w-54" />
+        <p className="mt-7">Hijri Calendar</p>
+      </div>
     </div>
-    <div>
-      <img src="/image 4.png" alt="Mosque Finder" className="mx-auto w-54" />
-      <p className="mt-7">Mosque Finder</p>
-    </div>
-    <div>
-      <img src="/image 5.png" alt="Prayer Requests" className="mx-auto w-54" />
-      <p className="mt-7">Prayer Requests</p>
-    </div>
-    <div>
-      <img src="/image.png" alt="Hijri Calendar" className="mx-auto w-54" />
-      <p className="mt-7">Hijri Calendar</p>
-    </div>
-  </div>
 
   {/* Newsletter Subscription */}
-  <div className="bg-transparent border border-white-5 p-6 rounded-lg mt-12 max-w-lg mx-auto shadow-lg">
-    <h3 className="text-lg font-semibold mb-4 text-center text-white">
-      Subscribe to Our Newsletter!
-    </h3>
-    <p className="text-gray-200 text-sm text-center mb-4">
-      For exciting updates on our app - from new features and sweet deals,
-      subscribe to our newsletter!
-    </p>
-
+  <div className="bg-transparent border border-white-5 p-6 rounded-lg mt-12 w-9/12 mx-auto shadow-lg">
+    
+{/* 
     <form className="space-y-4">
       <div>
         <label className="text-sm block text-gray-300">First Name: *</label>
@@ -171,8 +186,8 @@ Keep track of your missed (Qaza) prayers and stay motivated to complete them wit
       </div>
       <Button text="Show more" variant="primary" className="shadow-lg" />
 
-    </form>
-
+    </form> */}
+<PrayerTimings/>
    
   </div>
 </div></>
