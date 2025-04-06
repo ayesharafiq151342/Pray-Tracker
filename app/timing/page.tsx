@@ -52,8 +52,8 @@ const PrayerTimings = () => {
   return (
     <div className="w-full  bg-white shadow-lg rounded-xl p-6 flex flex-col md:flex-row gap-6">
     {/* Left Side - Image */}
-    <div className="w-[700px] flex flex-col justify-center text-center md:text-left">
-      <img src="/praytime.jpg" alt="Prayer Times" className="w-full h-96" />
+    <div className="lg:w-[800px] flex flex-col justify-center text-center md:text-left">
+      <img src="/praytime.jpg" alt="Prayer Times" className="w-full lg:h-96" />
     </div>
 
     {/* Right Side - Prayer Timings Table */}

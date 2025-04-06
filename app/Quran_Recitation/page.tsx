@@ -75,11 +75,11 @@ const SurahPage = () => {
         <Navbar />
       </div>
 
-      {/* ✅ Sidebar & Content Wrapper (Minus Navbar Height) */}
-      <div className="flex pt-16 h-full bg-darkGreen">
+      {/* ✅ Responsive Layout */}
+      <div className="flex flex-col md:flex-row pt-16 h-screen bg-darkGreen">
         {/* ✅ Sidebar: Surah List */}
-        <div className="w-72 bg-darkGreen text-white p-4 border-r border-gray-300 overflow-y-auto">
-          <h2 className="text-xl font-bold mb-2">Surah List</h2>
+        <div className="w-full md:w-72 bg-darkGreen text-white p-4 border-r border-gray-300 overflow-y-auto md:h-screen">
+          <h2 className="text-xl font-bold mb-2 text-center md:text-left">Surah List</h2>
 
           {/* ✅ Search Bar */}
           <input
@@ -94,7 +94,7 @@ const SurahPage = () => {
             {filteredSurahs.map((surah) => (
               <li
                 key={surah.number}
-                className={`cursor-pointer p-2 rounded-lg transition duration-200 ${
+                className={`cursor-pointer p-2 rounded-lg transition duration-200 text-center md:text-left ${
                   selectedSurah?.number === surah.number
                     ? "bg-lightGreen text-white"
                     : "hover:bg-HoverGreen"
@@ -108,7 +108,7 @@ const SurahPage = () => {
           </ul>
 
           {filteredSurahs.length === 0 && (
-            <p className="text-gray-400 mt-2">No Surahs found</p>
+            <p className="text-gray-400 mt-2 text-center">No Surahs found</p>
           )}
         </div>
 
@@ -118,34 +118,45 @@ const SurahPage = () => {
 
           {selectedSurah ? (
             <div className="bg-darkGreen p-6 rounded-lg">
-              <h1 className="text-3xl font-bold">{selectedSurah.englishName} ({selectedSurah.name})</h1>
-              <p className="bg-darkGreen">{selectedSurah.numberOfAyahs} Ayahs</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-center md:text-left">
+                {selectedSurah.englishName} ({selectedSurah.name})
+              </h1>
+              <p className="text-center md:text-left">{selectedSurah.numberOfAyahs} Ayahs</p>
 
               {loading ? (
-                <p className="mt-4 text-white animate-pulse">Loading Ayahs...</p>
+                <p className="mt-4 text-white animate-pulse text-center">Loading Ayahs...</p>
               ) : (
                 <div className="mt-4 bg-darkGreen p-4 rounded-lg space-y-4">
                   {/* ✅ Show Bismillah Image (Except Surah Taubah) */}
                   {selectedSurah.number !== 9 && (
                     <div className="flex justify-center mb-4">
-                      {/* <img src="/bismillah.jpg" alt="Bismillah" className="w-96" /> */}
-                    </div> 
-                   )}
-
-                  {ayahs.map((ayah) => (
-                    <div
-                      key={`${selectedSurah?.number}-${ayah.number}`}
-                      className="flex justify-end items-center mb-2 border-b border-gray-500 pb-2"
-                    >
-                      <span className="text-white text-right font-arabic text-2xl">{ayah.text}</span>
-                      <strong className="text-white ml-2">({ayah.numberInSurah})</strong>
+                      <img
+                        src="/bismillah.jpg"
+                        alt="Bismillah"
+                        className="w-60 sm:w-80 mx-auto"
+                      />
                     </div>
-                  ))}
+                  )}
+
+{ayahs.map((ayah) => (
+  <div
+    key={`${selectedSurah?.number}-${ayah.number}`}
+    className="flex flex-col items-center md:items-end mb-2 border-b border-gray-500 pb-2 text-center md:text-right"
+  >
+    <span className="text-white font-arabic text-lg sm:text-xl leading-relaxed">
+      {ayah.text}
+    </span>
+    <strong className="text-white mt-2">({ayah.numberInSurah})</strong>
+  </div>
+))}
+
                 </div>
               )}
             </div>
           ) : (
-            <p className="text-center text-gray-300">Select a Surah to see its Ayahs.</p>
+            <p className="text-center text-gray-300 mt-10">
+              Select a Surah to see its Ayahs.
+            </p>
           )}
         </div>
       </div>
